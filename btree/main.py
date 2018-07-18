@@ -27,8 +27,8 @@ def main():
     tree.insert(tatemono)
     tree.insert(kouchiku)
 
-
-    #tree.locate("建物")
+    # Print location of tatemono
+    tree.locate("建物")
 
 if __name__ == "__main__":
     main()
