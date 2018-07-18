@@ -4,10 +4,10 @@
 
 class BNode:
     """BNode class that are the building blocks for BTree"""
-    def __init__(self, label_str, parent_label_str=None):
+    def __init__(self, label_str, parent_node=None):
         """Initializer for BNode."""
         self.label = label_str
-        self.parent = parent_label_str
+        self.parent = parent_node
         self.children = []
 
 
@@ -29,11 +29,17 @@ class BTree:
         return "BTree with root node: " + str(self.root)
 
 
+    def _insert(self, new_node, current_node):
+        """Helper function to insert BNode to BTree. DFS."""
+        if current_node == new_node.parent:
+            current_node.children.append(new_node)
+            new_node.parent = current_node
+            return
+        if current_node.children:
+            for child in current_node.children:
+                self._insert(new_node, child)
+
+
     def insert(self, new_node):
         """Insert BNode to tree. Print error if node cannot be inserted."""
-        _insert(new_node, self.root)
-
-    def _insert(self, new_node, current_node):
-        """Helper function to insert BNode to BTree."""
-        if current_node.label == new_node.parent:
-            pass
+        self._insert(new_node, self.root)
